@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 .italic {
 	font-style: italic;
 }
@@ -28,11 +32,12 @@ h3 {
 }
 
 .card {
-	width: 300px;
+	width: 340px;
 	border: 1px solid grey;
 	padding: 10px 20px;
 	box-shadow: 8px 5px 8px grey;
 }
+
 
 .information {
 	border: 1px solid grey;
