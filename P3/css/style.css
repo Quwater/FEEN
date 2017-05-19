@@ -19,3 +19,11 @@ body {
 .title-logo {
   margin-top: 20px;
 }
+
+[class*="iconicstroke-"]:before {
+  font-family: 'IconicStroke', sans-serif;
+}
+
+.iconicstroke-book-alt {
+  font-size: 7em;
+}
