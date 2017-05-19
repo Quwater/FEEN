@@ -16,14 +16,28 @@ body {
   font-size: 60px;
 }
 
-.title-logo {
-  margin-top: 20px;
-}
-
 [class*="iconicstroke-"]:before {
   font-family: 'IconicStroke', sans-serif;
 }
 
 .iconicstroke-book-alt {
   font-size: 7em;
+}
+
+.img-center {
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+hr {
+    background: none repeat scroll 0 0 #7d97ad;
+    height: 5px;
+}
+
+.address-size {
+  font-size: 0.8em;
 }
