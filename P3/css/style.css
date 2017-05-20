@@ -32,12 +32,11 @@ body {
   text-align: center;
 }
 
-
-hr {
-    background: none repeat scroll 0 0 #7d97ad;
-    height: 5px;
-}
-
 .address-size {
   font-size: 0.8em;
+}
+
+.hr-decoration {
+    background: none repeat scroll 0 0 #7d97ad;
+    height: 5px;
 }
