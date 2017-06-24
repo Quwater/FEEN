@@ -105,7 +105,7 @@ function inName(name){
 
 $("#main").append(internationalizeButton);
 
-$("#main"),append(googleMap);
+$("#main").append(googleMap);
 
 projects.display = function(){
   for (var project in projects.projects) {
