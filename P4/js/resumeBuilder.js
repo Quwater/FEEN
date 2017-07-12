@@ -32,11 +32,11 @@ var work = {
       var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
       $(".work-entry:last").append(formattedDates);
 
+      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+      $(".work-entry:last").append(formattedLocation);
+
       var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[job].description);
       $(".work-entry:last").append(formattedDescription);
-
-      // var formattedLocation = HTMLworkLocation.repalce("%data%", work.jobs[job].location);
-      // $(".work-entry:last").append(formattedLocation);
     }
   }
 };
@@ -84,7 +84,7 @@ var bio = {
   "name": "Qu Xiawei",
   "role": "Web Developer",
   "welcomeMessage": "How are you!",
-  "bioPic": "../images/银之匙.jpg",
+  "biopic": "images/portrait.jpg",
   "contacts": {
     "mobile": "18771058009",
     "email": "qxwlyc@gmail.com",
@@ -98,6 +98,7 @@ var bio = {
     $("#header").prepend(formattedRole);
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
     $("#header").prepend(formattedName);
+
     var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
     $("#topContacts").append(formattedMobile);
     $("#footerContacts").append(formattedMobile);
@@ -107,15 +108,21 @@ var bio = {
     var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
     $("#topContacts").append(formattedGithub);
     $("#footerContacts").append(formattedGithub);
-    // var formattedLocation = HTMLlocation.repalce("%data%", bio.contacts.location);
-    // $("#topContacts").append(formattedLocation);
-    // $("#footerContacts").append(formattedLocation);
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#topContacts").append(formattedLocation);
+    $("#footerContacts").append(formattedLocation);
+
+    var formattedBiopic = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(formattedBiopic);
+    var formattedWelMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    $("#header").append(formattedWelMessage);
+
     if (bio.skills.length > 0) {
-      //$("#header").append(HTMLskillsStart);
-      var formattedSkill = HTMLheaderName.replace("%data%", bio.skills[0]);
-      $("#skills").append(formattedSkill);
-      var formattedSkill_2 = HTMLheaderName.replace("%data%", bio.skills[1]);
-      $("#skills").append(formattedSkill_2);
+      $("#header").append(HTMLskillsStart);
+      for (var skill in bio.skills) {
+        var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+        $("#skills").append(formattedSkill);
+      }
     }
   }
 };
@@ -127,7 +134,7 @@ var education = {
        "location": "Wuhan",
        "degree": "Undergraduate",
        "dates": "2010",
-       "major": "CS"
+       "majors": ["CS"]
     }
   ],
   "onlineCourses": [
@@ -147,13 +154,30 @@ var education = {
       var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
       var formattedInformation = formattedName + formattedDegree;
       $(".education-entry:last").append(formattedInformation);
-      var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-      $(".education-entry:last").append(formattedDates);
       var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
       $(".education-entry:last").append(formattedLocation);
-      var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
-      $(".education-entry:last").append(formattedMajor);
+      var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+      $(".education-entry:last").append(formattedDates);
+      if (education.schools[school].majors.length > 0) {
+        for (var major in education.schools[school].majors) {
+          var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
+          $(".education-entry:last").append(formattedMajor);
+        }
+      }
+    }
 
+    for (var onlineCourse in education.onlineCourses) {
+      $("#education").append(HTMLonlineClasses);
+      $("#education").append(HTMLschoolStart);
+
+      var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title);
+      var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school);
+      var formattedExperience = formattedTitle + formattedSchool;
+      $(".education-entry:last").append(formattedExperience);
+      var formattedDates_2 = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates);
+      $(".education-entry:last").append(formattedDates_2);
+      var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
+      $(".education-entry:last").append(formattedUrl);
     }
   }
 };
