@@ -182,7 +182,6 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
-
       alert(infoWindow.content);
     });
 
