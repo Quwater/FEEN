@@ -1,4 +1,9 @@
-body,
+body {
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgb(75, 75, 75);
+  max-width: 1200px;
+  margin: 0 auto;
+}
 div,
 ul,
 li,
