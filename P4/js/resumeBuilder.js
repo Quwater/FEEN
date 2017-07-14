@@ -137,8 +137,8 @@ var education = {
       var formattedInformation = formattedName + formattedDegree;
       var formattedLocation = HTMLschoolLocation.replace('%data%', school.location);
       var formattedDates = HTMLschoolDates.replace('%data%', school.dates);
-    
-      $(".education-entry:last").append(formattedInformation, formattedLocation, formattedDates);
+      var formattedURL = HTMLschoolURL.replace('#', school.url);
+      $(".education-entry:last").append(formattedInformation, formattedLocation, formattedDates, formattedURL);
       if (school.majors.length > 0) {
         school.majors.forEach(function(major){
           var formattedMajor = HTMLschoolMajor.replace('%data%', major);
