@@ -21,6 +21,7 @@ var work = {
  ],
 
  display: function(){
+    'use strict';
     for (var job = 0; job < work.jobs.length; job++) {
       $("#workExperience").append(HTMLworkStart);
 
@@ -52,6 +53,7 @@ var projects = {
   ],
 
   display: function(){
+    'use strict';
     projects.projects.forEach(function(project) {
       $("#projects").append(HTMLprojectStart);
 
@@ -84,6 +86,7 @@ var bio = {
   skills: ['read', 'write story'],
 
   display: function(){
+    'use strict';
     var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
     var formattedName = HTMLheaderName.replace('%data%', bio.name);
     $("#header").prepend(formattedName, formattedRole);
@@ -129,6 +132,7 @@ var education = {
   ],
 
   display: function() {
+    'use strict';
     education.schools.forEach(function(school) {
       $("#education").append(HTMLschoolStart);
 
