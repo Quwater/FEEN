@@ -14,12 +14,13 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.width = 50;
     this.height = 50;
+
     this.reset = function () {
-        //敌人的初始位置相应远一点，适量降低敌人出现的频率,初始化8个甲虫
+        //敌人的初始位置相应远一点，适量降低敌人出现的频率,初始化3个甲虫
         //所以敌人离游戏左边界面左边，随机距离1-8格
-        this.x = - Math.floor(Math.random() * xIncrement * 8 + 1);
+        this.x = - Math.floor(Math.random() * xIncrement * 3 + 1);
         this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yHalfbox;
-        // 赋随机速度，100-400
+        // 赋予甲虫随机速度，100-400
         this.speed = Math.floor(Math.random() * 300) + 100;
     };
     this.reset();
@@ -117,7 +118,7 @@ function checkCollisions() {
 // 把玩家对象放进一个叫 player 的变量里面
 
 var allEnemies = [];
-for (var i = 0; i < 8; i++) {
+for (var i = 0; i < 3; i++) {
     allEnemies.push(new Enemy());
 }
 var player = new Player();
