@@ -1,3 +1,10 @@
+// 定义全局变量
+var yIncrement = 83;
+var xIncrement = 101;
+var numRows = 6;
+var numCols = 5;
+var yOffset = Math.floor(yIncrement / 2);
+var xOffset = Math.floor(xIncrement / 2);
 // 这是我们的玩家要躲避的敌人
 var Enemy = function() {
     // 要应用到每个敌人的实例的变量写在这里
@@ -5,6 +12,16 @@ var Enemy = function() {
 
     // 敌人的图片或者雪碧图，用一个我们提供的工具函数来轻松的加载文件
     this.sprite = 'images/enemy-bug.png';
+    this.width = 50;
+    this.height = 50;
+    this.reset = function () {
+        //敌人的初始位置相应远一点，适量降低敌人出现的频率
+        this.x = -Math.floor(Math.random() * xIncrement * 8) - xIncrement;
+        this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yOffset;
+        // 赋随机速度，100-500
+        this.speed = Math.floor(Math.random() * 400) + 100;
+    };
+    this.reset();
 };
 
 // 此为游戏必须的函数，用来更新敌人的位置
@@ -12,6 +29,11 @@ var Enemy = function() {
 Enemy.prototype.update = function(dt) {
     // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
     // 都是以同样的速度运行的
+    this.x += this.speed * dt;
+    if (this.x >= numCols * xIncrement){
+        // 当敌人离开屏幕时，重置它的位置
+        this.reset();
+    }
 };
 
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -23,21 +45,82 @@ Enemy.prototype.render = function() {
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
 var Player = function() {
     this.sprite = 'images/char-boy.png';
+    this.width = 50;
+    this.height = 50;
+
+    // 重置玩家的位置
+    this.reset = function () {
+        this.x = xIncrement * 2;
+        this.y = yIncrement * 4 + yOffset;
+    };
+
+    // 在第一条路上重置玩家位置
+    this.reset();
+
+    //检查玩家位置是否处于特殊位置，如果是，进行相应操作
+    this.update = function () {
+        if (this.x >= numCols * xIncrement) {
+            this.x -= xIncrement;
+        }
+        if (this.x < 0) {
+            this.x += xIncrement;
+        }
+        if (this.y >= (numRows - 1) * yIncrement) {
+            this.y -= yIncrement;
+        }
+        if (this.y < 0) {
+            this.reset();
+        }
+        this.render();
+    };
+
+    // 通过检测输入键位，判定玩家位置
+    this.handleInput = function (direction) {
+        switch (direction) {
+            case 'left':
+                this.x -= xIncrement;
+                break;
+            case 'up':
+                this.y -= yIncrement;
+                break;
+            case 'right':
+                this.x += xIncrement;
+                break;
+            case 'down':
+                this.y += yIncrement;
+                break;
+        }
+        this.update();
+    };
+    // this.render = function () {
+    //     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // };
 };
 
 Player.prototype = Object.create(Enemy.prototype);
-Player.prototype.handleInput = function() {
 
-};
-Player.prototype.checkCollisions = function() {
+//判定两个矩形是否相撞的算法
+function checkCollisions() {
+    allEnemies.forEach(function (enemy) {
+        if (enemy.x < player.x + player.width &&
+            enemy.x + enemy.width > player.x &&
+            enemy.y < player.y + player.height &&
+            enemy.height + enemy.y > player.y) {
+            //相撞就重置玩家位置
+            player.reset();
+        }
+    });
+}
 
-};
 
 // 现在实例化你的所有对象
 // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
 // 把玩家对象放进一个叫 player 的变量里面
 
 var allEnemies = [];
+for (var i = 0; i < 8; i++) {
+    allEnemies.push(new Enemy());
+}
 var player = new Player();
 
 
