@@ -1,10 +1,10 @@
 // 定义全局变量
-var yIncrement = 83;
-var xIncrement = 101;
+var yIncrement = 80;
+var xIncrement = 100;
 var numRows = 6;
 var numCols = 5;
-var yOffset = Math.floor(yIncrement / 2);
-var xOffset = Math.floor(xIncrement / 2);
+//定义半个身位
+var yHalfbox = Math.floor(yIncrement / 2);
 // 这是我们的玩家要躲避的敌人
 var Enemy = function() {
     // 要应用到每个敌人的实例的变量写在这里
@@ -15,9 +15,10 @@ var Enemy = function() {
     this.width = 50;
     this.height = 50;
     this.reset = function () {
-        //敌人的初始位置相应远一点，适量降低敌人出现的频率
-        this.x = -Math.floor(Math.random() * xIncrement * 8) - xIncrement;
-        this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yOffset;
+        //敌人的初始位置相应远一点，适量降低敌人出现的频率,初始化8个甲虫
+        //所以敌人离游戏左边界面左边，随机距离1-8格
+        this.x = - Math.floor(Math.random() * xIncrement * 8 + 1);
+        this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yHalfbox;
         // 赋随机速度，100-500
         this.speed = Math.floor(Math.random() * 400) + 100;
     };
@@ -51,7 +52,7 @@ var Player = function() {
     // 重置玩家的位置
     this.reset = function () {
         this.x = xIncrement * 2;
-        this.y = yIncrement * 4 + yOffset;
+        this.y = yIncrement * 4 + yHalfbox;
     };
 
     // 在第一条路上重置玩家位置
@@ -92,11 +93,9 @@ var Player = function() {
         }
         this.update();
     };
-    // this.render = function () {
-    //     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    // };
 };
 
+//将Player的原型委托到Enemy的原型上，render()函数可以共用
 Player.prototype = Object.create(Enemy.prototype);
 
 //判定两个矩形是否相撞的算法
