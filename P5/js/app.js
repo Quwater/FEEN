@@ -56,49 +56,47 @@ var Player = function() {
         this.x = xIncrement * 2;
         this.y = yIncrement * 4 + yHalfbox;
     };
-
-    // 在第一条路上重置玩家位置
     this.reset();
-
-    // 检查玩家位置是否处于特殊位置，如果是，进行相应操作
-    this.update = function () {
-        if (this.x >= numCols * xIncrement) {
-            this.x -= xIncrement;
-        }
-        if (this.x < 0) {
-            this.x += xIncrement;
-        }
-        if (this.y >= (numRows - 1) * yIncrement) {
-            this.y -= yIncrement;
-        }
-        if (this.y < 0) {
-            this.reset();
-        }
-        this.render();
-    };
-
-    // 通过检测输入键位，判定玩家位置
-    this.handleInput = function (direction) {
-        switch (direction) {
-            case 'left':
-                this.x -= xIncrement;
-                break;
-            case 'up':
-                this.y -= yIncrement;
-                break;
-            case 'right':
-                this.x += xIncrement;
-                break;
-            case 'down':
-                this.y += yIncrement;
-                break;
-        }
-        this.update();
-    };
 };
 
 // 将Player的原型委托到Enemy的原型上，render()函数可以共用
 Player.prototype = Object.create(Enemy.prototype);
+
+// 检查玩家位置是否处于特殊位置，如果是，进行相应操作
+Player.prototype.update = function () {
+    if (this.x >= numCols * xIncrement) {
+        this.x -= xIncrement;
+    }
+    if (this.x < 0) {
+        this.x += xIncrement;
+    }
+    if (this.y >= (numRows - 1) * yIncrement) {
+        this.y -= yIncrement;
+    }
+    if (this.y < 0) {
+        this.reset();
+    }
+    this.render();
+};
+
+// 通过检测输入键位，判定玩家位置
+Player.prototype.handleInput = function (direction) {
+    switch (direction) {
+        case 'left':
+            this.x -= xIncrement;
+            break;
+        case 'up':
+            this.y -= yIncrement;
+            break;
+        case 'right':
+            this.x += xIncrement;
+            break;
+        case 'down':
+            this.y += yIncrement;
+            break;
+    }
+    this.update();
+};
 
 // 判定两个矩形是否相撞的算法
 function checkCollisions() {
