@@ -3,7 +3,7 @@ var yIncrement = 85;
 var xIncrement = 100;
 var numRows = 6;
 var numCols = 5;
-//定义半个身位
+// 定义半个身位
 var yHalfbox = Math.floor(yIncrement / 2);
 // 这是我们的玩家要躲避的敌人
 var Enemy = function() {
@@ -17,9 +17,10 @@ var Enemy = function() {
     // 赋予甲虫随机速度，100-400
     this.speed = Math.floor(Math.random() * 300) + 100;
 
+    // 重置敌人位置
     this.reset = function () {
-        //敌人的初始位置相应远一点，适量降低敌人出现的频率,初始化3个甲虫
-        //所以敌人离游戏左边界面左边，随机距离1-3格
+        // 敌人的初始位置相应远一点，适量降低敌人出现的频率,初始化3个甲虫
+        // 所以敌人离游戏左边界面左边，随机距离1-3格
         this.x = - Math.floor(Math.random() * xIncrement * 3 + 1);
         this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yHalfbox;
     };
@@ -59,7 +60,7 @@ var Player = function() {
     // 在第一条路上重置玩家位置
     this.reset();
 
-    //检查玩家位置是否处于特殊位置，如果是，进行相应操作
+    // 检查玩家位置是否处于特殊位置，如果是，进行相应操作
     this.update = function () {
         if (this.x >= numCols * xIncrement) {
             this.x -= xIncrement;
@@ -96,17 +97,17 @@ var Player = function() {
     };
 };
 
-//将Player的原型委托到Enemy的原型上，render()函数可以共用
+// 将Player的原型委托到Enemy的原型上，render()函数可以共用
 Player.prototype = Object.create(Enemy.prototype);
 
-//判定两个矩形是否相撞的算法
+// 判定两个矩形是否相撞的算法
 function checkCollisions() {
     allEnemies.forEach(function (enemy) {
         if (enemy.x < player.x + player.width &&
             enemy.x + enemy.width > player.x &&
             enemy.y < player.y + player.height &&
             enemy.height + enemy.y > player.y) {
-            //相撞就重置玩家位置
+            // 相撞就重置玩家位置
             player.reset();
         }
     });
