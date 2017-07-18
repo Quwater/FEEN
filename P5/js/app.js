@@ -1,5 +1,5 @@
 // 定义全局变量
-var yIncrement = 80;
+var yIncrement = 85;
 var xIncrement = 100;
 var numRows = 6;
 var numCols = 5;
@@ -19,8 +19,8 @@ var Enemy = function() {
         //所以敌人离游戏左边界面左边，随机距离1-8格
         this.x = - Math.floor(Math.random() * xIncrement * 8 + 1);
         this.y = Math.floor((Math.random() * 3) + 1) * yIncrement - yHalfbox;
-        // 赋随机速度，100-500
-        this.speed = Math.floor(Math.random() * 400) + 100;
+        // 赋随机速度，100-400
+        this.speed = Math.floor(Math.random() * 300) + 100;
     };
     this.reset();
 };
