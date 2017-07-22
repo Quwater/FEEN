@@ -446,10 +446,17 @@ var resizePizzas = function(size) {
 
   // 遍历披萨的元素并改变它们的宽度
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+    //   var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+    //   var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+    //   document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // }
+    var randomPizzaContainer = document.getElementsByClassName('randomPizzaContainer');
+    var dx = determineDx(randomPizzaContainer[0], size);
+    var newwidth = (randomPizzaContainer[0].offsetWidth + dx) + 'px';
+    // 改变的宽度一样，没有必要放进循环
+    for (var i = 0; i < randomPizzaContainer.length; i++) {
+      randomPizzaContainer[i].style.width = newwidth;
     }
   }
 
@@ -465,8 +472,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // 收集timing数据
 
 // 这个for循环在页面加载时创建并插入了所有的披萨
+//没有必要在每次循环是，进行一次遍历
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
+  // var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -499,9 +508,20 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+  // for (var i = 0; i < items.length; i++) {
+  //   var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+  //   items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  // }
+  //没必要每次循环时，运行一次document.body.scrollTop / 1250
+  var scrollTop = (document.body.scrollTop / 1250);
+  var phaseList = [];
+  for (var j= 0 ; j < 5; j++){
+    phaseList.push(Math.sin(scrollTop + j));
+  }
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    // var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100* phaseList[i%5] + 'px';
   }
 
   // 再次使用User Timing API。这很值得学习
