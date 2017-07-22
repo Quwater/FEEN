@@ -452,13 +452,13 @@ var resizePizzas = function(size) {
     //   document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     // }
     var randomPizzaContainer = document.getElementsByClassName('randomPizzaContainer');
-      var dx = determineDx(randomPizzaContainer[0], size);
-      var newwidth = (randomPizzaContainer[0].offsetWidth + dx) + 'px';
-      // All pizzas change the same amount of width so don't need to put it in loop'
-      for (var i = 0; i < randomPizzaContainer.length; i++) {
-        randomPizzaContainer[i].style.width = newwidth;
-      }
+    var dx = determineDx(randomPizzaContainer[0], size);
+    var newwidth = (randomPizzaContainer[0].offsetWidth + dx) + 'px';
+    // 改变的宽度一样，没有必要放进循环
+    for (var i = 0; i < randomPizzaContainer.length; i++) {
+      randomPizzaContainer[i].style.width = newwidth;
     }
+  }
 
   changePizzaSizes(size);
 
@@ -472,6 +472,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // 收集timing数据
 
 // 这个for循环在页面加载时创建并插入了所有的披萨
+//没有必要在每次循环是，进行一次遍历
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   // var pizzasDiv = document.getElementById("randomPizzas");
@@ -506,18 +507,12 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  // var items = document.querySelectorAll('.mover');
+  var items = document.querySelectorAll('.mover');
   // for (var i = 0; i < items.length; i++) {
   //   var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
   //   items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   // }
-  //
-  // window.performance.mark("mark_end_frame");
-  // window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-  // if (frame % 10 === 0) {
-  //   var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-  //   logAverageFrame(timesToUpdatePosition);
-  // }
+  //没必要每次循环时，运行一次document.body.scrollTop / 1250
   var scrollTop = (document.body.scrollTop / 1250);
   var phaseList = [];
   for (var j= 0 ; j < 5; j++){
