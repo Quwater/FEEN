@@ -24,3 +24,4 @@
 
 1. 修改changePizzaSizes( )，updatePositions(),将样式更改移出循环，以免强制同步布局
 2. 将document.getElementById()赋值语句移除循环，以免进行无意义的循环遍历
+3. 减少背景披萨数量
