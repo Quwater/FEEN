@@ -11,7 +11,7 @@ $(function() {
      * 都是关于 Rss 源的定义的，也就是应用中的 allFeeds 变量。
     */
     describe('RSS Feeds', function() {
-        function sameDetection(name) {
+        function haveElement(name) {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
@@ -32,14 +32,14 @@ $(function() {
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
          it('have valid urls', function() {
-             sameDetection('url');
+             haveElement('url');
          });
 
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有名字字段而且不是空的。
          */
          it('have valid names', function() {
-            sameDetection('name');
+            haveElement('name');
          });
     });
 
