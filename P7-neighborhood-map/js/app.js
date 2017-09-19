@@ -1,5 +1,5 @@
-var atlantaLat = 22.9152929;
-var atlantaLng = 114.0013883;
+var huangJiangLat = 22.9152929;
+var huangJiangLng = 114.0013883;
 var config = {
     apiKey: 'VWGK3UUZFWBGUZ45JLO2GK4JL4WP4XTL4L2HVU41DKUP5L3G',
     authUrl: 'https://foursquare.com/',
@@ -14,7 +14,7 @@ function init() {
 
 function loadData() {
     // 通过 foursquare API 检索附近标志性地点，接受数据并初始化地图。
-    $.getJSON(config.apiUrl + 'v2/venues/explore?ll=' + atlantaLat + ',' + atlantaLng + '&client_id=' + config.apiKey + '&client_secret=' + config.clientSecret + '&v=20140601', {}, function (data) {
+    $.getJSON(config.apiUrl + 'v2/venues/explore?ll=' + huangJiangLat + ',' + huangJiangLng + '&client_id=' + config.apiKey + '&client_secret=' + config.clientSecret + '&v=20140601', {}, function (data) {
         var locations = [];
         var venues = data.response.groups[0].items;
         for (var i = 0; i < venues.length; i++) {
