@@ -11,6 +11,12 @@ $(function() {
      * 都是关于 Rss 源的定义的，也就是应用中的 allFeeds 变量。
     */
     describe('RSS Feeds', function() {
+        function sameDetection(name) {
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toBe(0);
+            });
+        }
         /* 这是我们的第一个测试 - 它用来保证 allFeeds 变量被定义了而且
          * 不是空的。在你开始做这个项目剩下的工作之前最好实验一下这个测试
          * 比如你把 app.js 里面的 allFeeds 变量变成一个空的数组然后刷新
@@ -26,20 +32,14 @@ $(function() {
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
          it('have valid urls', function() {
-             allFeeds.forEach(function(feed) {
-                expect(feed.url).toBeDefined();
-                expect(feed.url.length).not.toBe(0);
-             });
+             sameDetection('url');
          });
 
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有名字字段而且不是空的。
          */
          it('have valid names', function() {
-            allFeeds.forEach(function(feed) {
-                expect(feed.name).toBeDefined();
-                expect(feed.name.length).not.toBe(0);
-            });
+            sameDetection('name');
          });
     });
 
